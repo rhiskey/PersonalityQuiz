@@ -28,6 +28,8 @@ class ResultViewController: UIViewController {
 // MARK: - Private Methods
 extension ResultViewController {
     private func defineMostFrequent() -> Answer? {
+        // First approach
+        /*
         let character = answers.map { $0.animal.rawValue }.max()
         var result = answers.first
         
@@ -38,9 +40,10 @@ extension ResultViewController {
             }
         }
         return result
+        */
         
-        ////  Second approach
-        // answers.filteredByMostPopular()
+        // Second approach
+         answers.filteredByMostPopular()
     }
     
     private func showResults(for bestMatch: Answer) {
