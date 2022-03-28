@@ -17,7 +17,7 @@ class ResultViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.setHidesBackButton(true, animated: false)
+        navigationItem.hidesBackButton = true
         
         if let bestMatch = defineMostFrequent() {
             showResults(for: bestMatch)
