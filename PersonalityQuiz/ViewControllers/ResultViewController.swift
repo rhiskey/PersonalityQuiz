@@ -27,7 +27,7 @@ class ResultViewController: UIViewController {
 
 // MARK: - Private Methods
 extension ResultViewController {
-    private func defineMostFrequent() -> Answer? {
+    private func defineMostFrequent() -> Animal? {
         // First approach
         /*
         let character = answers.map { $0.animal.rawValue }.max()
@@ -43,12 +43,40 @@ extension ResultViewController {
         */
         
         // Second approach
-         answers.filteredByMostPopular()
+        // return answers.filteredByMostPopular()
+        
+        // Alexey Efimov
+        
+        //        var frequencyOfAnimals: [Animal: Int] = [:]
+        //        let animals = answers.map { $0.animal }
+        
+        /*
+         for animal in animals {
+         if let animalTypeCount = frequencyOfAnimals[animal] {
+         frequencyOfAnimals.updateValue(animalTypeCount + 1, forKey: animal)
+         } else {
+         frequencyOfAnimals[animal] = 1
+         }
+         }
+         */
+        
+        //        for animal in animals {
+        //            frequencyOfAnimals[animal] = (frequencyOfAnimals[animal] ?? 0) + 1
+        //        }
+        
+        //        let sortedFrequencyOfAnimals = frequencyOfAnimals.sorted { $0.value > $1.value }
+        //        guard let mostFrequencyAnimal = sortedFrequencyOfAnimals.first?.key else { return }
+        
+        // Решение в одну строку:
+        let mostFrequencyAnimal = Dictionary(grouping: answers) { $0.animal }
+            .sorted { $0.value.count > $1.value.count }
+            .first?.key
+        return mostFrequencyAnimal
     }
     
-    private func showResults(for bestMatch: Answer) {
-        youAreLB.text = "Вы - \(bestMatch.animal.rawValue)"
-        descriptionLB.text = bestMatch.animal.definition
+    private func showResults(for bestMatch: Animal) {
+        youAreLB.text = "Вы - \(bestMatch.rawValue)"
+        descriptionLB.text = bestMatch.definition
     }
     
 }
