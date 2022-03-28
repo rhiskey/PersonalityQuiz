@@ -19,15 +19,13 @@ class ResultViewController: UIViewController {
         
         navigationItem.hidesBackButton = true
         
-        if let bestMatch = defineMostFrequent() {
-            showResults(for: bestMatch)
-        }
+        defineMostFrequent()
     }
 }
 
 // MARK: - Private Methods
 extension ResultViewController {
-    private func defineMostFrequent() -> Animal? {
+    private func defineMostFrequent(){
         // First approach
         /*
         let character = answers.map { $0.animal.rawValue }.max()
@@ -71,12 +69,12 @@ extension ResultViewController {
         let mostFrequencyAnimal = Dictionary(grouping: answers) { $0.animal }
             .sorted { $0.value.count > $1.value.count }
             .first?.key
-        return mostFrequencyAnimal
+        showResults(for: mostFrequencyAnimal)
     }
     
-    private func showResults(for bestMatch: Animal) {
-        youAreLB.text = "Вы - \(bestMatch.rawValue)"
-        descriptionLB.text = bestMatch.definition
+    private func showResults(for animal: Animal?) {
+        youAreLB.text = "Вы - \(animal?.rawValue ?? "🐶")!"
+        descriptionLB.text = animal?.definition
     }
     
 }
